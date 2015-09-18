@@ -1,0 +1,15 @@
+digraph Elementos{
+node [shape=record];
+rankdir=LR;
+e_1[label = "ID_Bus: 1"];
+
+e_1->e_2;
+e_2->e_1;
+e_2[label = "ID_Bus: 2"];
+
+e_2->e_3;
+e_3->e_2;
+e_3[label = "ID_Bus: 3"];
+
+}
+

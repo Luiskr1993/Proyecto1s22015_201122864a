@@ -1,0 +1,17 @@
+digraph Arbol{
+node [shape=record];
+n_12[label = "<izq> |<dat> ID:12 \n Nombre: Pedro \n Apellido: Valiente\n F.E:  0 |<der>"]
+n_12:izq -> n_7:dat;
+n_7[label = "<izq> |<dat> ID:7 \n Nombre: Ismael \n Apellido: Axpuac\n F.E:  0 |<der>"]
+n_7:izq -> n_4:dat;
+n_4[label = "<izq> |<dat> ID:4 \n Nombre: Nimayax \n Apellido: Cutz\n F.E:  0 |<der>"]
+n_7:der -> n_10:dat;
+n_10[label = "<izq> |<dat> ID:10 \n Nombre: Luis \n Apellido: Salazar\n F.E:  0 |<der>"]
+n_12:der -> n_32:dat;
+n_32[label = "<izq> |<dat> ID:32 \n Nombre: Kayle \n Apellido: kimbel\n F.E:  0 |<der>"]
+n_32:izq -> n_15:dat;
+n_15[label = "<izq> |<dat> ID:15 \n Nombre: Carlos \n Apellido: Valiente\n F.E:  0 |<der>"]
+n_32:der -> n_35:dat;
+n_35[label = "<izq> |<dat> ID:35 \n Nombre: Irvin \n Apellido: Guerra\n F.E:  0 |<der>"]
+}
+
