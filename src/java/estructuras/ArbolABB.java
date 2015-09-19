@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 public class ArbolABB {
 
     NodoABB raiz;
+    
     int contadorNodos;
 
     String cadena="";
@@ -205,6 +206,20 @@ public class ArbolABB {
             return true;
         }
     }
+    
+     public String busca2(int id) {
+
+        NodoABB encontrado;
+
+        encontrado = buscar(raiz, id);
+
+        if (encontrado == null) {
+            return encontrado.password;
+        } else {
+            return "";
+        }
+    }
+    
 
     public NodoABB buscar(NodoABB raiz, int id) {
 

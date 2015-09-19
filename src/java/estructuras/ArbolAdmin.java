@@ -107,6 +107,19 @@ public class ArbolAdmin {
             return true;
         }
     }
+     
+      public String busca2(String correo) {
+
+        NodoAdmin encontrado;
+
+        encontrado = buscar(raiz, correo);
+
+        if (encontrado == null) {
+            return encontrado.password;
+        } else {
+            return "";
+        }
+    }
 
     public NodoAdmin buscar(NodoAdmin raiz, String correo) {
 

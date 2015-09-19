@@ -13,12 +13,14 @@ public class NodoEstacionClave {
     
     int idEstacion;
     int fe;
+    int cantidadPersonas;
     String password, nombre;
     
     NodoEstacionClave izquierda, derecha;
     
-    public NodoEstacionClave(int idEstacion, String nombre,  String password){
+    public NodoEstacionClave(int idEstacion, String nombre,  String password, int cantidadPersonas){
         this.idEstacion = idEstacion;
+        this.cantidadPersonas = 0;
         this.password = password;
         this.nombre = nombre;
         this.fe = 0;

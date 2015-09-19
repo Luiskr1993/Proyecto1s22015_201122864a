@@ -18,9 +18,9 @@ public class ArbolEstacionGeneral {
     int contadorNodos;
     String cadena="";
     
-    public void insertarElemento(int idEstacion, String nombre, String password) {
+    public void insertarElemento(int idEstacion, String nombre, String password, int cantidadPersonas) {
 
-        NodoEstacionClave nuevo = new NodoEstacionClave(idEstacion, nombre, password);
+        NodoEstacionClave nuevo = new NodoEstacionClave(idEstacion, nombre, password, cantidadPersonas);
 
         if (raiz == null) {
             raiz = inserta(nuevo, raiz);
@@ -190,6 +190,50 @@ public class ArbolEstacionGeneral {
 
     }
 
+    
+    
+     public boolean busca(int id) {
+
+        NodoEstacionClave encontrado;
+
+        encontrado = buscar(raiz, id);
+
+        if (encontrado == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+     
+      public String busca2(int id) {
+
+        NodoEstacionClave encontrado;
+
+        encontrado = buscar(raiz, id);
+
+        if (encontrado == null) {
+            return encontrado.password;
+        } else {
+            return "";
+        }
+    }
+      
+      public NodoEstacionClave buscar(NodoEstacionClave raiz, int id) {
+
+        if (raiz != null) {
+
+            if (raiz.idEstacion == id) {
+                return raiz;
+            } else if (raiz.idEstacion > id) {
+                return buscar(raiz.izquierda, id);
+            } else if (raiz.idEstacion < id) {
+                return buscar(raiz.derecha, id);
+            }
+        }
+        return null;
+
+    }
+    
     public void graficar() {
 
         NodoEstacionClave aux;
