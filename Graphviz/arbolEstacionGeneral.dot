@@ -1,7 +1,11 @@
 digraph Arbol{
 node [shape=record];
-n_2000[label = "<izq> |<dat> ID:2000 \n Nombre: Monarca\n F.E:  1 |<der>"]
-n_2000:der -> n_2001:dat;
-n_2001[label = "<izq> |<dat> ID:2001 \n Nombre: La Reina\n F.E:  0 |<der>"]
+n_1001[label = "<izq> |<dat> ID:1001 \n Nombre: Landia\n F.E:  1 |<der>"]
+n_1001:izq -> n_1000:dat;
+n_1000[label = "<izq> |<dat> ID:1000 \n Nombre: Disney\n F.E:  0 |<der>"]
+n_1001:der -> n_1002:dat;
+n_1002[label = "<izq> |<dat> ID:1002 \n Nombre: Matamoros\n F.E:  1 |<der>"]
+n_1002:der -> n_1003:dat;
+n_1003[label = "<izq> |<dat> ID:1003 \n Nombre: KingSize\n F.E:  0 |<der>"]
 }
 

@@ -310,6 +310,17 @@ public class ServicioBuses {
         return encontrado;
 
     }
+    
+    @WebMethod(operationName = "devuelvePersonasEstacionClave")
+    public int devuelvePersonasEstacionClave(@WebParam(name = "idEstacion") int idEstacion) {
+
+        int encontrado;
+
+        encontrado = arbolEstacionGeneral.busca2(idEstacion);
+
+        return encontrado;
+
+    }
 
     @WebMethod(operationName = "pedirBus")
     public String pedirBus(@WebParam(name = "idEstacion") int idEstacion) {
@@ -368,7 +379,7 @@ public class ServicioBuses {
         int idBus = 0;
 
         for (int i = 1; i <= areaTexto.length(); i++) {
-            String[] filas = areaTexto.split("\\n");
+            String[] filas = areaTexto.split("<br>");
             for (int a = 1; a <= filas.length; a++) {
                 String[] palabras = filas[i].split(",");
                 contadorFilas++;
@@ -379,5 +390,34 @@ public class ServicioBuses {
         return "contador Palabras: " + contadorFilas;
 
     }
+    
+    @WebMethod(operationName = "devuelveCantidadEstaciones")
+    @SuppressWarnings("empty-statement")
+    public int devuelveCantidadEstaciones() {
+        
+       
+
+        return  arbolEstacionGeneral.contadorNodos-1;
+
+    }
+    
+    @WebMethod(operationName = "verEstacionGeneral")
+    public String verEstacionGeneral(@WebParam(name = "idEstacionGeneral") int idEstacionGeneral) {
+        
+       NodoEstacionClave encontrado;
+       
+       encontrado = arbolEstacionGeneral.buscar(arbolEstacionGeneral.raiz, idEstacionGeneral);
+       
+          
+          if(encontrado==null){
+              return null;
+          }
+          else{
+              
+              return "Nombre: "+encontrado.nombre + " Personas: "+encontrado.cantidadPersonas+ " || ";
+          }
+
+    }
+    
 
 }

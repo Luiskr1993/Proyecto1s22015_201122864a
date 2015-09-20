@@ -205,18 +205,34 @@ public class ArbolEstacionGeneral {
         }
     }
      
-      public String busca2(int id) {
+      public int busca2(int id) {
 
         NodoEstacionClave encontrado;
 
         encontrado = buscar(raiz, id);
 
         if (encontrado == null) {
-            return encontrado.password;
+            return 0;
         } else {
-            return "";
+            return encontrado.cantidadPersonas;
         }
     }
+      
+      public int buscaPersonas(int idEstacion, int salientes){
+          
+          NodoEstacionClave encontrado;
+          
+          encontrado = buscar(raiz, idEstacion);
+          
+          if(encontrado==null){
+              return -1;
+          }
+          else{
+              
+              return encontrado.cantidadPersonas = encontrado.cantidadPersonas - salientes;
+          }
+          
+      }
       
       public NodoEstacionClave buscar(NodoEstacionClave raiz, int id) {
 

@@ -1,7 +1,23 @@
 digraph Elementos{
 node [shape=record];
 rankdir=LR;
-e_1993[label = "ID_Estacion: 1993"];
+e_1990[label = "ID_Estacion: 1990"];
+
+e_1990->e_1991;
+e_1991->e_1990;
+e_1991[label = "ID_Estacion: 1991"];
+
+e_1991->e_1001;
+e_1001->e_1991;
+e_1001[label = "ID_Estacion: 1001"];
+
+e_1001->e_1002;
+e_1002->e_1001;
+e_1002[label = "ID_Estacion: 1002"];
+
+e_1002->e_1992;
+e_1992->e_1002;
+e_1992[label = "ID_Estacion: 1992"];
 
 }
 

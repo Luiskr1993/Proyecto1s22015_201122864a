@@ -1,5 +1,9 @@
 digraph Arbol{
 node [shape=record];
+n_11[label = "<izq> |<dat> ID:11 \n Nombre: Carlos \n Apellido: Valiente\n F.E:  0 |<der>"]
+n_11:izq -> n_10:dat;
 n_10[label = "<izq> |<dat> ID:10 \n Nombre: Luis \n Apellido: Salazar\n F.E:  0 |<der>"]
+n_11:der -> n_12:dat;
+n_12[label = "<izq> |<dat> ID:12 \n Nombre: Fernando \n Apellido: Paz\n F.E:  0 |<der>"]
 }
 

@@ -1,15 +1,15 @@
 digraph Elementos{
 node [shape=record];
 rankdir=LR;
-e_2011[label = "ID_Bus: 2011\n Hora Inicio: 5.3\n Hora Final: 16.4\n Ruta: Transmetro1"];
+e_100[label = "ID_Bus: 100\n Hora Inicio: 6.0\n Hora Final: 12.0\n Ruta: Transmetro1"];
 
-e_2011->e_2012;
-e_2012->e_2011;
-e_2012[label = "ID_Bus: 2012\n Hora Inicio: 6.1\n Hora Final: 9.5\n Ruta: Transmetro2"];
+e_100->e_101;
+e_101->e_100;
+e_101[label = "ID_Bus: 101\n Hora Inicio: 7.0\n Hora Final: 12.3\n Ruta: Transmetro2"];
 
-e_2012->e_2013;
-e_2013->e_2012;
-e_2013[label = "ID_Bus: 2013\n Hora Inicio: 7.35\n Hora Final: 19.4\n Ruta: Transmetro3"];
+e_101->e_102;
+e_102->e_101;
+e_102[label = "ID_Bus: 102\n Hora Inicio: 5.4\n Hora Final: 13.2\n Ruta: Transmetro3"];
 
 }
 
