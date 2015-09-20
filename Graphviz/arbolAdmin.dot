@@ -1,9 +1,9 @@
 digraph Arbol{
 node [shape=record];
 n_luis1993[label = "<izq> |<dat> ID:luis1993 \n Password: 1234\n F.E:  0 |<der>"]
-n_luis1993:izq -> n_gatethBale:dat;
-n_gatethBale[label = "<izq> |<dat> ID:gatethBale \n Password: 1234\n F.E:  0 |<der>"]
-n_luis1993:der -> n_steveJobs:dat;
-n_steveJobs[label = "<izq> |<dat> ID:steveJobs \n Password: 1234\n F.E:  0 |<der>"]
+n_luis1993:izq -> n_carlos1993:dat;
+n_carlos1993[label = "<izq> |<dat> ID:carlos1993 \n Password: 1234\n F.E:  0 |<der>"]
+n_luis1993:der -> n_romeo1993:dat;
+n_romeo1993[label = "<izq> |<dat> ID:romeo1993 \n Password: 1234\n F.E:  0 |<der>"]
 }
 

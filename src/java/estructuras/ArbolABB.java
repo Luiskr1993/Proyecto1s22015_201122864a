@@ -237,7 +237,7 @@ public class ArbolABB {
 
     }
 
-    public boolean insertarBus(int idChofer, int idBus, int idDia) {
+    public boolean insertarBus(int idChofer, int idBus, int idDia, Double horaInicio, Double horaFinal, String nombreRuta) {
         NodoABB temp;
         NodoFecha temp2;
         NodoBus temp3;
@@ -254,11 +254,11 @@ public class ArbolABB {
                 temp2 = temp.fechas.buscarFecha(idDia);
 
                 if (temp2 != null) {
-                    temp2.lista.insertar(idBus);
+                    temp2.lista.insertar(idBus, horaInicio, horaFinal, nombreRuta);
                     return true;
                 }
             } else {
-                temp2.lista.insertar(idBus);
+                temp2.lista.insertar(idBus, horaInicio, horaFinal, nombreRuta);
                 return true;
             }
         }
@@ -282,7 +282,7 @@ public class ArbolABB {
         } else {
 
             try {
-                fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolChoferes.dot");
+                fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolChoferes.dot");
                 pw = new PrintWriter(fichero);
 
                 pw.println("digraph Arbol{");
@@ -300,10 +300,10 @@ public class ArbolABB {
                     String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
 
 //path del archivo creado con el codigo del graphviz que queremos
-                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolChoferes.dot";
+                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolChoferes.dot";
 
 //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
-                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolChoferes.jpg";
+                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolChoferes.jpg";
 
 //tipo de imagen de salida, en este caso es jpg
                     String tParam = "-Tjpg";

@@ -69,20 +69,19 @@ public class ServicioBuses {
             encontrado = arbolChoferes.busca(id);
             if (encontrado == true) {
                 /*
-                claveEncontrada = arbolChoferes.busca2(id);
-                if (claveEncontrada.equals(password)) {
-                    return true;
-                } else {
-                    return false;
-                }*/
-                
+                 claveEncontrada = arbolChoferes.busca2(id);
+                 if (claveEncontrada.equals(password)) {
+                 return true;
+                 } else {
+                 return false;
+                 }*/
+
                 return true;
             } else {
                 return false;
             }
 
-        }
-        else if (tipoUsuario.equals("EstacionClave")) {
+        } else if (tipoUsuario.equals("EstacionClave")) {
             int id = Integer.parseInt(user);
             encontrado = arbolEstacionClave.busca(id);
             if (encontrado == true) {
@@ -100,9 +99,7 @@ public class ServicioBuses {
                 return false;
             }
 
-        }
-        
-        else if (tipoUsuario.equals("EstacionGeneral")) {
+        } else if (tipoUsuario.equals("EstacionGeneral")) {
             int id = Integer.parseInt(user);
             encontrado = arbolEstacionGeneral.busca(id);
             if (encontrado == true) {
@@ -120,9 +117,7 @@ public class ServicioBuses {
                 return false;
             }
 
-        }
-        
-        else {
+        } else {
             return false;
         }
 
@@ -168,10 +163,10 @@ public class ServicioBuses {
     }
 
     @WebMethod(operationName = "crearEstacionGeneral")
-    public String crearEstacionGeneral(@WebParam(name = "idEstacionG") int idEstacion, @WebParam(name = "nombreEstacionG") String nombreEstacion, @WebParam(name = "passwordG") String password, @WebParam(name = "cantidadPersonasG") int cantidadPersonas) {
+    public String crearEstacionGeneral(@WebParam(name = "idEstacionG") int idEstacion, @WebParam(name = "nombreEstacionG") String nombreEstacion, @WebParam(name = "passwordG") String password, @WebParam(name = "cantidadPersonasG") int cantidadPersonasG) {
 
         if (!nombreEstacion.equals("") && !password.equals("")) {
-            arbolEstacionGeneral.insertarElemento(idEstacion, nombreEstacion, password, cantidadPersonas);
+            arbolEstacionGeneral.insertarElemento(idEstacion, nombreEstacion, password, cantidadPersonasG);
             arbolEstacionGeneral.graficar();
             return "ID: " + idEstacion + " Nombre: " + nombreEstacion + " creada con exito";
         } else {
@@ -180,9 +175,9 @@ public class ServicioBuses {
     }
 
     @WebMethod(operationName = "crearBus")
-    public String crearBus(@WebParam(name = "idBus") int idBus) {
+    public String crearBus(@WebParam(name = "idBus00") int idBus, @WebParam(name = "horaInicio") Double horaInicio, @WebParam(name = "horaFinal") Double horaFinal, @WebParam(name = "nombreRuta") String nombreRuta) {
 
-        busesTotales.insertar(idBus);
+        busesTotales.insertar(idBus, horaInicio, horaFinal, nombreRuta);
         busesTotales.graficar();
 //busesTotales.imprimir();
         return "Bus: " + idBus + " insertado con exito";
@@ -193,7 +188,11 @@ public class ServicioBuses {
     public String asignarBus(@WebParam(name = "idBus") int idBus, @WebParam(name = "idChofer") int idChofer, @WebParam(name = "fecha") int fecha) {
 
         boolean choferEncontrado;
-        choferEncontrado = arbolChoferes.insertarBus(idChofer, idBus, fecha);
+        NodoBus busEncontrado;
+
+        busEncontrado = busesTotales.buscarBus(idBus);
+
+        choferEncontrado = arbolChoferes.insertarBus(idChofer, idBus, fecha, busEncontrado.horaInicio, busEncontrado.horaFinal, busEncontrado.nombreRuta);
 
         if (choferEncontrado == true) {
             return "Bus asignado con exito";
@@ -249,6 +248,40 @@ public class ServicioBuses {
 
     }
 
+    @WebMethod(operationName = "verHorarios")
+    public String verHorarios(@WebParam(name = "idBus") int idBus) {
+
+        NodoBus encontrado;
+
+        encontrado = busesTotales.buscarBus(idBus);
+
+        if (encontrado == null) {
+            return "No se encuentra el bus deseado";
+        } else {
+
+            return "Ruta: " + encontrado.nombreRuta + " Inicio: " + encontrado.horaInicio + "Finaliza: " + encontrado.horaFinal + "||";
+        }
+
+    }
+
+    @WebMethod(operationName = "asignarRuta")
+    public String asignarRuta(@WebParam(name = "idBus") int idBus, @WebParam(name = "estacion1") int estacion1) {
+
+        NodoBus busEncontrado;
+
+        busEncontrado = busesTotales.buscarBus(idBus);
+
+        if (busEncontrado != null) {
+
+            busEncontrado.rutas.insertar(estacion1);
+            busEncontrado.rutas.graficar();
+            return busEncontrado.rutas.imprimir();
+        }
+
+        return "vacio";
+
+    }
+
     @WebMethod(operationName = "fechasAsignadas")
     public String fechasAsignadas(@WebParam(name = "idChofer3") int idChofer) {
 
@@ -264,6 +297,86 @@ public class ServicioBuses {
             return chofer.fechas.imprimir();
         }
         return "vacio";
+
+    }
+
+    @WebMethod(operationName = "devuelvePersonasEstacionGeneral")
+    public int devuelvePersonasEstacionGeneral(@WebParam(name = "idEstacion") int idEstacion) {
+
+        int encontrado;
+
+        encontrado = arbolEstacionClave.busca2(idEstacion);
+
+        return encontrado;
+
+    }
+
+    @WebMethod(operationName = "pedirBus")
+    public String pedirBus(@WebParam(name = "idEstacion") int idEstacion) {
+
+        NodoBus temp;
+        NodoRuta temp2;
+
+        temp = busesTotales.primero;
+
+        for (int i = 1; i <= busesTotales.contadorBuses; i++) {
+
+            temp2 = temp.rutas.buscarRuta(idEstacion);
+
+            if (temp2 == null) {
+                temp = temp.siguiente;
+            } else {
+                return "ID. Bus Asignado: " + temp.idBus + " Hora Llegada: " + temp.horaInicio;
+            }
+        }
+
+        return "No hay bus asignado para esta estacion";
+
+    }
+
+    @WebMethod(operationName = "sacarPersonas")
+    public int sacarPersonas(@WebParam(name = "idEstacion") int idEstacion, @WebParam(name = "salientes") int salientes) {
+
+        int cantidadPersonas;
+        NodoBus temp;
+        NodoRuta temp2;
+
+        temp = busesTotales.primero;
+        cantidadPersonas = arbolEstacionClave.buscaPersonas(idEstacion, salientes);
+
+        for (int i = 1; i <= busesTotales.contadorBuses; i++) {
+
+            temp2 = temp.rutas.buscarRuta(idEstacion);
+
+            if (temp2 == null) {
+                temp = temp.siguiente;
+            } else {
+                temp.rutas.eliminarNodo(idEstacion);
+                temp.rutas.graficar();
+                return cantidadPersonas;
+            }
+        }
+
+        return cantidadPersonas;
+
+    }
+
+    @WebMethod(operationName = "cargar")
+    public String cargar(@WebParam(name = "areaTexto") String areaTexto) {
+
+        int contadorFilas = 0;
+        int idBus = 0;
+
+        for (int i = 1; i <= areaTexto.length(); i++) {
+            String[] filas = areaTexto.split("\\n");
+            for (int a = 1; a <= filas.length; a++) {
+                String[] palabras = filas[i].split(",");
+                contadorFilas++;
+            }
+
+        }
+
+        return "contador Palabras: " + contadorFilas;
 
     }
 

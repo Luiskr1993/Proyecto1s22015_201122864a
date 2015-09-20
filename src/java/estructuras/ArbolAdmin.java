@@ -263,7 +263,7 @@ public class ArbolAdmin {
         } else {
 
             try {
-                fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolAdmin.dot");
+                fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolAdmin.dot");
                 pw = new PrintWriter(fichero);
 
                 pw.println("digraph Arbol{");
@@ -281,10 +281,10 @@ public class ArbolAdmin {
                     String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
 
 //path del archivo creado con el codigo del graphviz que queremos
-                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolAdmin.dot";
+                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolAdmin.dot";
 
 //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
-                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolAdmin.jpg";
+                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolAdmin.jpg";
 
 //tipo de imagen de salida, en este caso es jpg
                     String tParam = "-Tjpg";

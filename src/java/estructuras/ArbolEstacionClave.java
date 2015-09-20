@@ -221,11 +221,27 @@ public class ArbolEstacionClave {
         encontrado = buscar(raiz, id);
 
         if (encontrado == null) {
-            return encontrado.cantidadPersonas;
-        } else {
             return 0;
+        } else {
+            return encontrado.cantidadPersonas;
         }
     }
+      
+      public int buscaPersonas(int idEstacion, int salientes){
+          
+          NodoEstacionClave encontrado;
+          
+          encontrado = buscar(raiz, idEstacion);
+          
+          if(encontrado==null){
+              return -1;
+          }
+          else{
+              
+              return encontrado.cantidadPersonas = encontrado.cantidadPersonas - salientes;
+          }
+          
+      }
       
       public NodoEstacionClave buscar(NodoEstacionClave raiz, int id) {
 
@@ -261,7 +277,7 @@ public class ArbolEstacionClave {
         } else {
 
             try {
-                fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolEstacionClave.dot");
+                fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolEstacionClave.dot");
                 pw = new PrintWriter(fichero);
 
                 pw.println("digraph Arbol{");
@@ -279,10 +295,10 @@ public class ArbolEstacionClave {
                     String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
 
 //path del archivo creado con el codigo del graphviz que queremos
-                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolEstacionClave.dot";
+                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolEstacionClave.dot";
 
 //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
-                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\arbolEstacionClave.jpg";
+                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\arbolEstacionClave.jpg";
 
 //tipo de imagen de salida, en este caso es jpg
                     String tParam = "-Tjpg";
@@ -334,7 +350,7 @@ public class ArbolEstacionClave {
 
         String a = "";
         if (aux != null) {
-            String sentencia = "n_" + aux.idEstacion + "[label = \"<izq> |<dat> ID:" + aux.idEstacion + " \\n Nombre: " + aux.nombre +  "\\n F.E:  " + aux.fe + " |<der>\"]";
+            String sentencia = "n_" + aux.idEstacion + "[label = \"<izq> |<dat> ID:" + aux.idEstacion + " \\n Nombre: " + aux.nombre +  "\\n F.E:  " + aux.fe+  "\\n Personas:  " + aux.cantidadPersonas + " |<der>\"]";
 
             pw.println(sentencia);
 

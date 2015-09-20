@@ -1,0 +1,7 @@
+digraph Elementos{
+node [shape=record];
+rankdir=LR;
+e_1993[label = "ID_Estacion: 1993"];
+
+}
+

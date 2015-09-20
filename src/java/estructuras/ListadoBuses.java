@@ -25,11 +25,11 @@ public class ListadoBuses {
 
     }
 
-    public void insertar(int idBus) {
+    public void insertar(int idBus, Double horaInicio, Double horaFinal, String nombreRuta) {
         NodoBus temp, nuevo;
         temp = primero;
 
-        nuevo = new NodoBus(idBus);
+        nuevo = new NodoBus(idBus, horaInicio, horaFinal, nombreRuta);
 
         if (primero == null) {
             primero = nuevo;
@@ -154,7 +154,7 @@ public class ListadoBuses {
             
             try
         {
-            fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\ListaGeneralBuses.dot");
+            fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaGeneralBuses.dot");
             pw = new PrintWriter(fichero);
  
             pw.println("digraph Elementos{");
@@ -163,7 +163,7 @@ public class ListadoBuses {
             
             for(int i = 1; i<= contadorBuses; i++){
                 
-                String codigo = "e_"+aux.idBus+"[label = \"ID_Bus: "+aux.idBus  + "\"];\n"; 
+                String codigo = "e_"+aux.idBus+"[label = \"ID_Bus: "+aux.idBus + "\\n Hora Inicio: "+ aux.horaInicio + "\\n Hora Final: "+ aux.horaFinal + "\\n Ruta: "+ aux.nombreRuta  + "\"];\n"; 
                 
                 pw.println(codigo);
                 
@@ -187,10 +187,10 @@ public class ListadoBuses {
                     String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
 
 //path del archivo creado con el codigo del graphviz que queremos
-                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\ListaGeneralBuses.dot";
+                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaGeneralBuses.dot";
 
 //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
-                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD\\Graphviz\\ListaGeneralBuses.jpg";
+                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaGeneralBuses.jpg";
 
 //tipo de imagen de salida, en este caso es jpg
                     String tParam = "-Tjpg";

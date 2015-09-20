@@ -7,31 +7,31 @@ package estructuras;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Luiskr
  */
-public class ListaFechas {
+public class ListaRutas {
+    NodoRuta primero;
+    NodoRuta ultimo;
     
-    NodoFecha primero;
-    NodoFecha ultimo;
+    int contadorRutas;
     
-    int contadorDias;
-    
-    public ListaFechas(){
-        this.contadorDias = 0;
+    public ListaRutas(){
+        this.contadorRutas = 0;
         this.primero = null;
         this.ultimo = null;
     }
     
     
-    public void insertar(int idDia, int idBus){
+    public void insertar(int idEstacion){
         
-        NodoFecha temp, nuevo;
+        NodoRuta temp, nuevo;
         temp = primero;
         
-        nuevo = new NodoFecha(idDia);
+        nuevo = new NodoRuta(idEstacion);
         
         if(primero == null){
             primero = nuevo;
@@ -42,12 +42,12 @@ public class ListaFechas {
             nuevo.anterior = ultimo;
             ultimo = nuevo;
         }
-        contadorDias++;
+        contadorRutas++;
     }
     
-   public NodoFecha buscarFecha(int id){
+   public NodoRuta buscarRuta(int id){
        
-       NodoFecha temp;
+       NodoRuta temp;
        
        temp = primero;
        
@@ -55,12 +55,12 @@ public class ListaFechas {
            System.out.println("la lista esta vacia");
        }
        else{
-           if(temp.idDia == id){
+           if(temp.idEstacion == id){
                return temp;
            }
            else{
                int i=1;
-               while(temp.idDia != id && i<= contadorDias){
+               while(temp.idEstacion != id && i<= contadorRutas){
                    if(temp.siguiente != null){
                        temp = temp.siguiente;
                    }
@@ -80,9 +80,56 @@ public class ListaFechas {
        return null;
    }
    
+   public void eliminarNodo(int id){
+        NodoRuta temp, temp2;
+        temp = primero;
+        
+        if(temp == null){
+                JOptionPane.showMessageDialog(
+               null,
+                "No se encontro el elemento a eliminar");
+        }
+        else{
+            while(temp.idEstacion != id){
+                if(temp.siguiente != null){
+                    temp = temp.siguiente;
+                }
+                
+                else if(temp.anterior == null){
+                        primero = null;
+                }
+              
+            }
+            
+            if(temp == primero){
+                primero = temp.siguiente;
+                
+            }
+            else{
+                
+                if(temp == ultimo){
+                    ultimo = temp.anterior;
+                    //ultimo.siguiente = null;
+                }
+                else{
+                    temp2 = temp.siguiente;
+                    
+                    temp2.anterior = temp.anterior;
+                    temp.anterior.siguiente = temp2;
+                }
+                
+            }
+            
+            
+        }
+        
+        contadorRutas--;
+        
+    }
+   
    
     public String imprimir() {
-        NodoFecha temp;
+        NodoRuta temp;
         String cadena="";
         temp = primero;
 
@@ -91,13 +138,13 @@ public class ListaFechas {
         } else {
 
             System.out.println("********************************lista de Fechas*********************");
-            for (int i = 1; i <= contadorDias; i++) {
+            for (int i = 1; i <= contadorRutas; i++) {
 
                 if (temp == null) {
                     System.out.println("nulo en i: " + i);
                 } else {
-                    System.out.println("Dia: " + temp.idDia);
-                    cadena += "Dia: "+ temp.idDia + "\n";
+                    System.out.println("Dia: " + temp.idEstacion);
+                    cadena += "Estacion: "+ temp.idEstacion + "\n";
                     temp = temp.siguiente;
                 }
 
@@ -111,7 +158,7 @@ public class ListaFechas {
     }
    
    public void graficar(){
-         NodoFecha aux;
+         NodoRuta aux;
          
          aux = primero;
          FileWriter fichero = null;
@@ -125,23 +172,23 @@ public class ListaFechas {
             
             try
         {
-            fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaGeneralBuses.dot");
+            fichero = new FileWriter("C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaRutas.dot");
             pw = new PrintWriter(fichero);
  
             pw.println("digraph Elementos{");
             pw.println("node [shape=record];");
             pw.println("rankdir=LR;");
             
-            for(int i = 1; i<= contadorDias; i++){
+            for(int i = 1; i<= contadorRutas; i++){
                 
-                String codigo = "e_"+aux.idDia+"[label = \"ID_Bus: "+aux.idDia  + "\"];\n"; 
+                String codigo = "e_"+aux.idEstacion+"[label = \"ID_Estacion: "+aux.idEstacion  + "\"];\n"; 
                 
                 pw.println(codigo);
                 
                 if(aux.siguiente != null){
-                    String sentencia = "e_"+aux.idDia+"->e_"+aux.siguiente.idDia+";";
+                    String sentencia = "e_"+aux.idEstacion+"->e_"+aux.siguiente.idEstacion+";";
                     pw.println(sentencia);
-                    String sentencia2 = "e_"+aux.siguiente.idDia+"->e_"+aux.idDia+";";
+                    String sentencia2 = "e_"+aux.siguiente.idEstacion+"->e_"+aux.idEstacion+";";
                     pw.println(sentencia2);
                 
                     aux = aux.siguiente;
@@ -158,10 +205,10 @@ public class ListaFechas {
                     String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
 
 //path del archivo creado con el codigo del graphviz que queremos
-                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaGeneralBuses.dot";
+                    String fileInputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaRutas.dot";
 
 //path de salida del grafo, es decir el path de la imagen que vamos a crear con graphviz
-                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaGeneralBuses.jpg";
+                    String fileOutputPath = "C:\\Users\\Luiskr\\Documents\\NetBeansProjects\\WebServiceEDD_1\\Graphviz\\ListaRutas.jpg";
 
 //tipo de imagen de salida, en este caso es jpg
                     String tParam = "-Tjpg";
@@ -209,5 +256,4 @@ ex.printStackTrace();
         }
         
      }
-    
 }

@@ -1,9 +1,11 @@
 digraph Arbol{
 node [shape=record];
-n_2[label = "<izq> |<dat> ID:2 \n Nombre: Elektra\n F.E:  0 |<der>"]
-n_2:izq -> n_1:dat;
-n_1[label = "<izq> |<dat> ID:1 \n Nombre: Municipalidad\n F.E:  0 |<der>"]
-n_2:der -> n_3:dat;
-n_3[label = "<izq> |<dat> ID:3 \n Nombre: Universidad\n F.E:  0 |<der>"]
+n_1991[label = "<izq> |<dat> ID:1991 \n Nombre: Matamoros\n F.E:  1\n Personas:  20 |<der>"]
+n_1991:izq -> n_1990:dat;
+n_1990[label = "<izq> |<dat> ID:1990 \n Nombre: Municipalidad\n F.E:  0\n Personas:  20 |<der>"]
+n_1991:der -> n_1992:dat;
+n_1992[label = "<izq> |<dat> ID:1992 \n Nombre: Universidad\n F.E:  1\n Personas:  20 |<der>"]
+n_1992:der -> n_1993:dat;
+n_1993[label = "<izq> |<dat> ID:1993 \n Nombre: Limonada\n F.E:  0\n Personas:  20 |<der>"]
 }
 
