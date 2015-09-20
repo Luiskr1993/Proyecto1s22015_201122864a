@@ -371,6 +371,33 @@ public class ServicioBuses {
         return cantidadPersonas;
 
     }
+    
+    @WebMethod(operationName = "sacarPersonasGeneral")
+    public int sacarPersonasGeneral(@WebParam(name = "idEstacion") int idEstacion, @WebParam(name = "salientes") int salientes) {
+
+        int cantidadPersonas;
+        NodoBus temp;
+        NodoRuta temp2;
+
+        temp = busesTotales.primero;
+        cantidadPersonas = arbolEstacionGeneral.buscaPersonas(idEstacion, salientes);
+
+        for (int i = 1; i <= busesTotales.contadorBuses; i++) {
+
+            temp2 = temp.rutas.buscarRuta(idEstacion);
+
+            if (temp2 == null) {
+                temp = temp.siguiente;
+            } else {
+                temp.rutas.eliminarNodo(idEstacion);
+                temp.rutas.graficar();
+                return cantidadPersonas;
+            }
+        }
+
+        return cantidadPersonas;
+
+    }
 
     @WebMethod(operationName = "cargar")
     public String cargar(@WebParam(name = "areaTexto") String areaTexto) {
